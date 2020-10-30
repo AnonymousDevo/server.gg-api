@@ -5,6 +5,8 @@ const express = require('express')
 const app = express()
 
 app.get('/emojis/:id', async (req, res) => {
+    
+    if(req.params.id.length < 10) res.status(404).send('Server id length can\'t be less than 10')
 
     const url = "https://top.gg/servers/" + req.params.id
 
@@ -37,6 +39,10 @@ app.get('/emojis/:id', async (req, res) => {
                 res.send('Request failed with status code: 404')
             }
          })
+})
+
+app.get('*', (req, res) => {
+res.status(404).send('Requested data not found! try again with right endpoint')
 })
 
 app.listen(8080)
