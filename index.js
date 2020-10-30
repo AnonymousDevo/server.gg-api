@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+const axios = require('axios')
 const cheerio = require('cheerio')
 const request = require('request')
 const express = require('express')
@@ -20,12 +20,7 @@ app.get('/emojis/:id', async (req, res) => {
                 $('img').each((index, image) => {
                     let img = $(image).attr('src')
                     if(img.startsWith('https://cdn.discordapp.com/emojis/')) {
-
-                    
                     array.push(img)
-                    
-        
-                    console.log(img)
         
                         link = img.substring(0, img.length-4);
                         request(link+'.gif', (err, resp, html) => {
@@ -39,7 +34,7 @@ app.get('/emojis/:id', async (req, res) => {
                 res.send(array)
         
             }else{
-                res.send('Request failed')
+                res.send('Request failed with status code: 404')
             }
          })
 })
